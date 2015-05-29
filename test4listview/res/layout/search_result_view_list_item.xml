@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/search_result_listview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_result_listview_item_textview"
+    android:layout_width="10dp"
+    android:layout_height="100dp"
+    android:gravity="center_vertical"
+    android:textSize="12sp" />
