@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <include layout="@layout/search_top_view" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <include layout="@layout/search_result_view" />
+
+        <include layout="@layout/search_result_empty_view" />
+
+        <include layout="@layout/search_error_view" />
+
+        <include layout="@layout/search_loading_view" />
+    </FrameLayout>
+
+</LinearLayout>

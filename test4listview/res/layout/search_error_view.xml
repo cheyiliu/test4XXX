@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_error_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="网络不可用，请检查网络" />
