@@ -9,12 +9,12 @@
         android:layout_height="wrap_content" />
 
     <com.didi.biz.editor.container.OrderCreatorItemBase
-        android:id="@+id/start_time"
+        android:id="@+id/flight_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.didi.biz.editor.container.OrderCreatorItemBase
-        android:id="@+id/flight_no"
+        android:id="@+id/start_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

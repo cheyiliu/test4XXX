@@ -6,7 +6,10 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.test4uibuilder.R;
 
@@ -41,6 +44,42 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
     /** 元素顺序很重要，涉及到发单页输入有效性校验 */
     private List<OrderCreatorItemBase> mOrderedTemplate = new ArrayList<OrderCreatorItemBase>();
 
+    private Handler mHandler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 1) {
+                Toast.makeText(getApplicationContext(), "PickAtAirport", Toast.LENGTH_LONG).show();
+                buildTemplate(CreatorType.PickAtAirport);
+                mHandler.sendEmptyMessageDelayed(2, 10000);
+
+            }
+            if (msg.what == 2) {
+                Toast.makeText(getApplicationContext(), "SendToAirport", Toast.LENGTH_LONG).show();
+                buildTemplate(CreatorType.SendToAirport);
+                mHandler.sendEmptyMessageDelayed(3, 10000);
+            }
+            if (msg.what == 3) {
+                Toast.makeText(getApplicationContext(), "RentCar", Toast.LENGTH_LONG).show();
+                buildTemplate(CreatorType.RentCar);
+                mHandler.sendEmptyMessageDelayed(4, 10000);
+            }
+
+            if (msg.what == 4) {
+                Toast.makeText(getApplicationContext(), "BookingCar", Toast.LENGTH_LONG).show();
+                buildTemplate(CreatorType.BookingCar);
+                mHandler.sendEmptyMessageDelayed(1, 10000);// 消息继续循环
+            }
+            return false;
+        }
+    });
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +87,17 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
 
         initItems();
 
-        CreatorType type = CreatorType.BookingCar;
-        if (null != getIntent()) {
-            type = (CreatorType) getIntent().getSerializableExtra(CREATOR_TYPE);
-            if (null == type) {
-                type = CreatorType.BookingCar;
-            }
-        }
-        buildTemplate(type);
+//        CreatorType type = CreatorType.BookingCar;
+//        if (null != getIntent()) {
+//            type = (CreatorType) getIntent().getSerializableExtra(CREATOR_TYPE);
+//            if (null == type) {
+//                type = CreatorType.BookingCar;
+//            }
+//        }
+//        buildTemplate(type);
+
+        mHandler.sendEmptyMessageDelayed(1, 0);
+
     }
 
     /**

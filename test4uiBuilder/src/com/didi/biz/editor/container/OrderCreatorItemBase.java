@@ -90,6 +90,11 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
     @Override
     public void setItemEnabled(boolean enable) {
         mItemEnabled = enable;
+        if (enable) {
+            setVisibility(View.VISIBLE);
+        } else {
+            setVisibility(View.GONE);
+        }
     }
 
     /*

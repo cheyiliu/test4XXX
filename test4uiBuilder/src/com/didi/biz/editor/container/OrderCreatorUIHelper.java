@@ -22,7 +22,7 @@ public class OrderCreatorUIHelper {
      */
     public static void initCarType(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("车型");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
         item.setRightInputContent("setRightInputContent");
         item.setOnClickListener(new OnClickListener() {
@@ -40,9 +40,9 @@ public class OrderCreatorUIHelper {
      */
     public static void initFlight(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("航班");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
-        item.setRightInputContent("content1", "content2");
+        item.setRightInputContent("content line1", "content line2");
         item.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -58,9 +58,9 @@ public class OrderCreatorUIHelper {
      */
     public static void initPassanger(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("乘客");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
-        item.setRightInputContent("setRightInputContent");
+        item.setRightInputContent("姓名abc", "电话1234567890");
         item.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -76,7 +76,7 @@ public class OrderCreatorUIHelper {
      */
     public static void initRentTime(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("租车时长");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
         item.setRightInputContent("setRightInputContent");
         item.setOnClickListener(new OnClickListener() {
@@ -95,7 +95,7 @@ public class OrderCreatorUIHelper {
     public static void initStartPos(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
 
         item.setLeftSubject("起点");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
         item.setRightInputContent("setRightInputContent");
         item.setOnClickListener(new OnClickListener() {
@@ -114,7 +114,7 @@ public class OrderCreatorUIHelper {
      */
     public static void initStartTime(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("出发时间");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
         item.setRightInputContent("setRightInputContent");
         item.setOnClickListener(new OnClickListener() {
@@ -132,7 +132,7 @@ public class OrderCreatorUIHelper {
      */
     public static void initToPos(OrderCreatorItemBase item, final ICreatorItemInputCallback inputCallback) {
         item.setLeftSubject("终点");
-        item.setLeftSubjectDes("setLeftSubjectDes");
+        item.setLeftSubjectDes(" xx描述");
         item.setRightIcon(R.drawable.ic_launcher);
         item.setRightInputContent("setRightInputContent");
         item.setOnClickListener(new OnClickListener() {
