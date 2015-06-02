@@ -5,7 +5,10 @@ import com.example.test4uibuilder.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Class description
@@ -15,6 +18,17 @@ import android.widget.RelativeLayout;
  */
 
 public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem {
+    private TextView mTextViewLeftSubject;
+    private TextView mTextViewLeftSubjectDes;
+    private TextView mTextViewRightInputHint;
+    private TextView mTextViewRightInputContent;
+    private TextView mTextViewRightInputContentLine1;
+    private TextView mTextViewRightInputContentLine2;
+    
+    private boolean mItemEnabled;
+
+    View m2LineContenter = findViewById(R.id.right_input_content_2line_container);
+    ImageView mImageViewRightIcon = (ImageView) findViewById(R.id.right_icon);
 
     /**
      * @param context
@@ -45,6 +59,16 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.order_creator_item_base, this, true);
+
+        mTextViewLeftSubject = (TextView) findViewById(R.id.left_subject);
+        mTextViewLeftSubjectDes = (TextView) findViewById(R.id.left_subject_des);
+        mTextViewRightInputHint = (TextView) findViewById(R.id.right_input_hint);
+        mTextViewRightInputContent = (TextView) findViewById(R.id.right_input_content);
+        mTextViewRightInputContentLine1 = (TextView) findViewById(R.id.right_input_content_line1);
+        mTextViewRightInputContentLine2 = (TextView) findViewById(R.id.right_input_content_line2);
+
+        m2LineContenter = findViewById(R.id.right_input_content_2line_container);
+        mImageViewRightIcon = (ImageView) findViewById(R.id.right_icon);
     }
 
     /*
@@ -54,7 +78,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public boolean isItemEnabled() {
-        return false;
+        return mItemEnabled;
     }
 
     /*
@@ -64,6 +88,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setItemEnabled(boolean enable) {
+        mItemEnabled = enable;
     }
 
     /*
@@ -73,6 +98,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setLeftSubject(String subject) {
+        mTextViewLeftSubject.setText(subject);
     }
 
     /*
@@ -82,6 +108,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setLeftSubjectDes(String des) {
+        mTextViewLeftSubjectDes.setText(des);
     }
 
     /*
@@ -91,6 +118,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setRightIcon(int iconId) {
+        mImageViewRightIcon.setImageResource(iconId);
     }
 
     /*
@@ -100,6 +128,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setRightInputHint(String hint) {
+        mTextViewRightInputHint.setText(hint);
     }
 
     /*
@@ -109,6 +138,9 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setRightInputContent(String content) {
+        mTextViewRightInputContent.setText(content);
+        mTextViewRightInputContent.setVisibility(View.VISIBLE);
+        m2LineContenter.setVisibility(View.GONE);
     }
 
     /*
@@ -118,6 +150,9 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setRightInputContentLine1(String content) {
+        mTextViewRightInputContentLine1.setText(content);
+        mTextViewRightInputContent.setVisibility(View.GONE);
+        m2LineContenter.setVisibility(View.VISIBLE);
     }
 
     /*
@@ -127,6 +162,9 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
      */
     @Override
     public void setRightInputContentLine2(String content) {
+        mTextViewRightInputContentLine2.setText(content);
+        mTextViewRightInputContent.setVisibility(View.GONE);
+        m2LineContenter.setVisibility(View.VISIBLE);
     }
 
 }

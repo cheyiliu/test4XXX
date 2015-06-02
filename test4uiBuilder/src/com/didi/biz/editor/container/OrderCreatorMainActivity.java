@@ -64,22 +64,22 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
         OrderCreatorUIHelper.initCarType(mItemCarType, this);
 
         mItemFlight = (OrderCreatorItemBase) findViewById(R.id.flight_no);
-        OrderCreatorUIHelper.initFlight(mItemCarType, this);
+        OrderCreatorUIHelper.initFlight(mItemFlight, this);
 
         mItemPassanger = (OrderCreatorItemBase) findViewById(R.id.for_who);
-        OrderCreatorUIHelper.initPassanger(mItemCarType, this);
+        OrderCreatorUIHelper.initPassanger(mItemPassanger, this);
 
         mItemRentTime = (OrderCreatorItemBase) findViewById(R.id.rent_time);
-        OrderCreatorUIHelper.initRentTime(mItemCarType, this);
+        OrderCreatorUIHelper.initRentTime(mItemRentTime, this);
 
         mItemStartPos = (OrderCreatorItemBase) findViewById(R.id.from_pos);
-        OrderCreatorUIHelper.initStartPos(mItemCarType, this);
+        OrderCreatorUIHelper.initStartPos(mItemStartPos, this);
 
         mItemStartTime = (OrderCreatorItemBase) findViewById(R.id.start_time);
-        OrderCreatorUIHelper.initStartTime(mItemCarType, this);
+        OrderCreatorUIHelper.initStartTime(mItemStartTime, this);
 
         mItemToPos = (OrderCreatorItemBase) findViewById(R.id.to_pos);
-        OrderCreatorUIHelper.initToPos(mItemCarType, this);
+        OrderCreatorUIHelper.initToPos(mItemToPos, this);
 
         // add all by ui orders
         mOrderedTemplate.add(mItemPassanger);
