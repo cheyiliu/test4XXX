@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
  * @since 2015-6-2
  */
 
-public class OrderCreatorItemOneLine extends RelativeLayout implements ICreatorItem {
+public class OrderCreatorItemOneLine extends OrderCreatorItemBase {
 
     /**
      * @param context
