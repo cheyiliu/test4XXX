@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -87,14 +88,14 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
 
         initItems();
 
-//        CreatorType type = CreatorType.BookingCar;
-//        if (null != getIntent()) {
-//            type = (CreatorType) getIntent().getSerializableExtra(CREATOR_TYPE);
-//            if (null == type) {
-//                type = CreatorType.BookingCar;
-//            }
-//        }
-//        buildTemplate(type);
+        // CreatorType type = CreatorType.BookingCar;
+        // if (null != getIntent()) {
+        // type = (CreatorType) getIntent().getSerializableExtra(CREATOR_TYPE);
+        // if (null == type) {
+        // type = CreatorType.BookingCar;
+        // }
+        // }
+        // buildTemplate(type);
 
         mHandler.sendEmptyMessageDelayed(1, 0);
 
@@ -173,6 +174,9 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
     @Override
     public void requestPassenger() {
         Log.i(TAG, "requestPassenger");
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType(Phone.CONTENT_TYPE);
+        startActivityForResult(i, RequestCode.REQUEST_CODE_PICK_PASSANGER);
     }
 
     /*
@@ -305,4 +309,15 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
         Log.i(TAG, "onCarTypeSelected");
     }
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (RESULT_OK == resultCode) {
+            if (RequestCode.REQUEST_CODE_PICK_PASSANGER == requestCode) {
+                onPassengerSelected();
+            }
+        }
+    }
 }
