@@ -3,37 +3,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.didi.biz.editor.container.OrderCreatorItemTwoLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/for_who"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemTwoLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/start_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemTwoLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/flight_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemOneLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/from_pos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemOneLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/to_pos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemOneLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/rent_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.didi.biz.editor.container.OrderCreatorItemOneLine
+    <com.didi.biz.editor.container.OrderCreatorItemBase
         android:id="@+id/car_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
