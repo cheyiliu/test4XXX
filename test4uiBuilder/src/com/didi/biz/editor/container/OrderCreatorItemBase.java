@@ -3,6 +3,7 @@ package com.didi.biz.editor.container;
 import com.example.test4uibuilder.R;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
     private TextView mTextViewRightInputContent;
     private TextView mTextViewRightInputContentLine1;
     private TextView mTextViewRightInputContentLine2;
-    
+
     private boolean mItemEnabled;
 
     View m2LineContenter = findViewById(R.id.right_input_content_2line_container);
@@ -141,30 +142,31 @@ public class OrderCreatorItemBase extends RelativeLayout implements ICreatorItem
         mTextViewRightInputContent.setText(content);
         mTextViewRightInputContent.setVisibility(View.VISIBLE);
         m2LineContenter.setVisibility(View.GONE);
+        if (TextUtils.isEmpty(content)) {
+            mTextViewRightInputHint.setVisibility(View.VISIBLE);
+        } else {
+            mTextViewRightInputHint.setVisibility(View.INVISIBLE);
+        }
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.didi.biz.editor.container.ICreatorItem#setRightInputContentLine1(java.lang.String)
+     * @see com.didi.biz.editor.container.ICreatorItem#setRightInputContent(java.lang.String,
+     * java.lang.String)
      */
     @Override
-    public void setRightInputContentLine1(String content) {
-        mTextViewRightInputContentLine1.setText(content);
+    public void setRightInputContent(String content1, String content2) {
         mTextViewRightInputContent.setVisibility(View.GONE);
         m2LineContenter.setVisibility(View.VISIBLE);
-    }
+        mTextViewRightInputContentLine1.setText(content1);
+        mTextViewRightInputContentLine2.setText(content2);
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.didi.biz.editor.container.ICreatorItem#setRightInputContentLine2(java.lang.String)
-     */
-    @Override
-    public void setRightInputContentLine2(String content) {
-        mTextViewRightInputContentLine2.setText(content);
-        mTextViewRightInputContent.setVisibility(View.GONE);
-        m2LineContenter.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(content1) && TextUtils.isEmpty(content2)) {
+            mTextViewRightInputHint.setVisibility(View.VISIBLE);
+        } else {
+            mTextViewRightInputHint.setVisibility(View.INVISIBLE);
+        }
     }
 
 }

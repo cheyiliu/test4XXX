@@ -22,7 +22,5 @@ public interface ICreatorItem {
 
     void setRightInputContent(String content);
 
-    void setRightInputContentLine1(String content);
-
-    void setRightInputContentLine2(String content);
+    void setRightInputContent(String content1, String content2);
 }

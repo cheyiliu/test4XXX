@@ -42,8 +42,7 @@ public class OrderCreatorUIHelper {
         item.setLeftSubject("航班");
         item.setLeftSubjectDes("setLeftSubjectDes");
         item.setRightIcon(R.drawable.ic_launcher);
-        item.setRightInputContentLine1("setRightInputContent1");
-        item.setRightInputContentLine2("setRightInputContent2");
+        item.setRightInputContent("content1", "content2");
         item.setOnClickListener(new OnClickListener() {
 
             @Override

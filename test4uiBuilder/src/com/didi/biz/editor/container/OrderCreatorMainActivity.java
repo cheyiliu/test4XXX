@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.test4uibuilder.R;
 
@@ -13,6 +14,7 @@ import com.example.test4uibuilder.R;
 public class OrderCreatorMainActivity extends Activity implements ICreatorItemInputCallback {
 
     private static final String CREATOR_TYPE = "creator_type";
+    private static final String TAG = "OrderCreatorMainActivity";
 
     /**
      * 启动发单页
@@ -128,6 +130,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestPassenger() {
+        Log.i(TAG, "requestPassenger");
     }
 
     /*
@@ -137,6 +140,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onPassengerSelected() {
+        Log.i(TAG, "onPassengerSelected");
     }
 
     /*
@@ -146,6 +150,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestFlight() {
+        Log.i(TAG, "requestFlight");
     }
 
     /*
@@ -155,6 +160,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onFlightSelected() {
+        Log.i(TAG, "onFlightSelected");
     }
 
     /*
@@ -164,6 +170,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestStartTime() {
+        Log.i(TAG, "requestStartTime");
     }
 
     /*
@@ -173,6 +180,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onStartTimeSelected() {
+        Log.i(TAG, "onStartTimeSelected");
     }
 
     /*
@@ -182,6 +190,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestFromPos() {
+        Log.i(TAG, "requestFromPos");
     }
 
     /*
@@ -191,6 +200,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onFromPosSelected() {
+        Log.i(TAG, "onFromPosSelected");
     }
 
     /*
@@ -200,6 +210,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestToPos() {
+        Log.i(TAG, "requestToPos");
     }
 
     /*
@@ -209,6 +220,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onToPosSelected() {
+        Log.i(TAG, "onToPosSelected");
     }
 
     /*
@@ -218,6 +230,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestRentTime() {
+        Log.i(TAG, "requestRentTime");
     }
 
     /*
@@ -227,6 +240,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onRentTimeSelected() {
+        Log.i(TAG, "onRentTimeSelected");
     }
 
     /*
@@ -236,6 +250,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void requestCarType() {
+        Log.i(TAG, "requestCarType");
     }
 
     /*
@@ -245,6 +260,7 @@ public class OrderCreatorMainActivity extends Activity implements ICreatorItemIn
      */
     @Override
     public void onCarTypeSelected() {
+        Log.i(TAG, "onCarTypeSelected");
     }
 
 }
