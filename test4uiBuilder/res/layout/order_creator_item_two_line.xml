@@ -42,7 +42,7 @@
             android:id="@+id/right_input_content_line2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="右侧输入内容_ling2" />
+            android:text="右侧输入内容_line2" />
     </LinearLayout>
 
     <ImageView
