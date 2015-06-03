@@ -1,8 +1,11 @@
 package com.didi.es.map.marker;
 
+import android.view.View;
+
 import com.didi.es.map.base.EsMapView;
 import com.didi.es.map.base.EsMarkerBase;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter;
+import com.tencent.tencentmap.mapsdk.maps.model.Marker;
 
 /**
  * 定位中的标示
@@ -12,6 +15,23 @@ import com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter;
  */
 
 public class EsLoadingMarker extends EsMarkerBase {
+    private InfoWindowAdapter mInfoWindowAdapter = new InfoWindowAdapter() {
+        
+        @Override
+        public View getInfoWindowPressState(Marker arg0) {
+            return null;
+        }
+        
+        @Override
+        public View getInfoWindow(Marker arg0) {
+            return null;
+        }
+        
+        @Override
+        public View getInfoContents(Marker arg0) {
+            return null;
+        }
+    };
 
     /**
      * @param mapView
@@ -32,7 +52,7 @@ public class EsLoadingMarker extends EsMarkerBase {
      */
     @Override
     public InfoWindowAdapter getInfoWindowAdapter() {
-        return null;
+        return mInfoWindowAdapter;
     }
 
 }
