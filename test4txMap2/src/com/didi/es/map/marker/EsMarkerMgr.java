@@ -10,13 +10,15 @@ import com.didi.es.map.base.EsMarkerBase;
  * @since 2015-6-4
  */
 
-public class EsMarkerHelper {
-    private EsMarkerHelper() {
+public class EsMarkerMgr {
+    private EsMarkerMgr() {
     }
 
     private static EsMarkerBase sLoadingMarker;
+
     /**
      * 在地图上展示加载标记
+     * 
      * @param mapView
      * @param iconId
      * @param lat
@@ -35,4 +37,24 @@ public class EsMarkerHelper {
             sLoadingMarker = null;
         }
     }
+
+    public static void showMyPosMarker(EsMapView mapView, int iconId, double lat, double lng) {
+    }
+
+    public static void updateMyPosMarker(double lat, double lng) {
+    }
+
+    public static void hideMyPosMarker() {
+    }
+
+    public static void showDriverPosMarker(EsMapView mapView, int iconId, double lat, double lng) {
+    }
+
+    public static void updateDriverPosMarker(double lat, double lng) {
+    }
+
+    public static void hideDriverPosMarker() {
+    }
+
+    // others
 }

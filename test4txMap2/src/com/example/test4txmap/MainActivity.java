@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.view.Menu;
 
 import com.didi.es.map.base.EsMapView;
-import com.didi.es.map.marker.EsLoadingMarker;
+import com.didi.es.map.marker.EsFromToInfoMarker;
 import com.didi.es.map.marker.EsSimpleMarker;
 import com.didi.es.map.marker.EsSingleLineInfoMarker;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
@@ -16,7 +17,7 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 public class MainActivity extends Activity {
     private EsMapView mapView;
     EsSingleLineInfoMarker esSingleLineInfoMarker;
-
+    EsFromToInfoMarker esFromToInfoMarker;
     Handler mHandler = new Handler(new Handler.Callback() {
 
         @Override
@@ -35,12 +36,24 @@ public class MainActivity extends Activity {
         mapView.getMap().animateCamera(CameraUpdateFactory.newLatLng(new LatLng(39.905029, 116.389546)));
 
         // test3Marker();
-        new EsLoadingMarker(mapView, R.drawable.red_location, 39.905029, 116.389546);
-        new EsLoadingMarker(mapView, R.drawable.red_location, 39.905029, 116.379546);
+        new EsSingleLineInfoMarker(mapView, R.drawable.red_location, 39.905029, 116.389546).setTextInfo("111");
+        new EsSingleLineInfoMarker(mapView, R.drawable.red_location, 39.905029, 116.379546).setTextInfo("22222");
         new EsSimpleMarker(mapView, R.drawable.ic_launcher, 39.905029, 116.369546);
 
         esSingleLineInfoMarker = new EsSingleLineInfoMarker(mapView, R.drawable.red_location, 39.905029, 116.359546);
         mHandler.sendEmptyMessageDelayed(1, 5000);
+
+        esFromToInfoMarker = new EsFromToInfoMarker(mapView, R.drawable.red_location, 39.905029, 116.349546);
+        esFromToInfoMarker.setFromInfo("从得实出发", "");
+        esFromToInfoMarker.setToInfo("到西二旗");
+        
+        String title = "title";
+        String description = "des";
+        String DateAdded = "date";
+        // tView.setText(Html.fromHtml("<![CDATA[<font color='#145A14'>123text</font>]]>"));
+        esFromToInfoMarker.setToInfo(Html.fromHtml("<b>"
+                + title + "</b>" +  "<small><font color='#145A14'>" + description + "</font></small>" +  "<small>"
+                + DateAdded + "</small>").toString());
     }
 
     /**

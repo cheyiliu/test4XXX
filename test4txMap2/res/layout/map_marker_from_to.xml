@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dip"
         android:layout_marginTop="5dip"
-        android:text="@string/call_confirm_from"
+        android:text="从"
         android:textSize="18sp" />
 
     <TextView
@@ -58,7 +58,7 @@
         android:layout_alignLeft="@id/from_txt"
         android:layout_below="@id/from_txt"
         android:paddingBottom="5dip"
-        android:text="@string/call_confirm_to"
+        android:text="到"
         android:textSize="18sp" />
 
     <TextView

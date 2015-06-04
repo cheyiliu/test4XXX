@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:x="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/map_bg_bubble_normal"
+    android:orientation="horizontal"
+    android:paddingLeft="16dip"
+    android:paddingRight="16dip" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已行驶10.0公里" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="低速行驶5分钟" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" .3元" />
+    </LinearLayout>
+     <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="18dip"
+        android:layout_height="15dip"
+        android:layout_marginLeft="8dip"
+        android:layout_marginTop="11dip"
+        android:paddingRight="10dip"
+        android:layout_toRightOf="@id/from_pos"
+        android:src="@drawable/common_icn_arrow" />
+</LinearLayout>
