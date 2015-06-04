@@ -5,7 +5,9 @@ import java.util.List;
 import android.location.Location;
 
 import com.didi.es.map.base.EsMapView;
+import com.tencent.tencentmap.mapsdk.maps.CameraUpdate;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
+import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLngBounds;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLngBounds.Builder;
@@ -18,6 +20,36 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLngBounds.Builder;
  */
 public class EsMapHelper {
     private EsMapHelper() {
+    }
+
+    /**
+     * 将一点移动到地图中心并缩放
+     * 
+     * @param mapView
+     * @param lat
+     * @param lng
+     * @param zoom
+     */
+    public static void setCenterAndZoom(EsMapView mapView, double lat, double lng, float zoom) {
+        if (null != mapView) {
+            CameraUpdate cu = CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+                    .target(new LatLng(lat, lng)).zoom(zoom).build());
+            mapView.getMap().animateCamera(cu);
+        }
+    }
+
+    /**
+     * 将一点移动到地图中心
+     * 
+     * @param mapView
+     * @param lat
+     * @param lng
+     */
+    public static void setCenter(EsMapView mapView, double lat, double lng) {
+        if (null != mapView) {
+            CameraUpdate cu = CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(new LatLng(lat, lng)).build());
+            mapView.getMap().animateCamera(cu);
+        }
     }
 
     /**
@@ -79,6 +111,33 @@ public class EsMapHelper {
         float[] results = new float[5];
         Location.distanceBetween(from.latitude, from.longitude, to.latitude, to.longitude, results);
         return results[0];
+    }
+
+    /**
+     * 设置logo的停靠位置
+     * 
+     * @param mapView
+     * @param anchor
+     *            : 0左下；1右下；2右上；3左上
+     */
+    public static void setLogoAnchor(EsMapView mapView, int anchor) {
+        if (null != mapView) {
+            if (0 == anchor || 1 == anchor || 2 == anchor || 3 == anchor) {
+                mapView.getMap().setLogoAnchor(anchor);
+            }
+        }
+    }
+
+    /**
+     * 设置logo是否可见
+     * 
+     * @param mapView
+     * @param visible
+     */
+    public static void setMapLogoVisible(EsMapView mapView, boolean visible) {
+        if (null != mapView) {
+            mapView.getMap().setLogoVisible(visible);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.didi.es.map.base;
 
 import android.util.Log;
+import android.view.View;
 
 import com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap.OnInfoWindowClickListener;
@@ -17,7 +18,7 @@ import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions;
  * @since 2015-5-25
  */
 
-public abstract class EsMarkerBase implements OnMarkerClickListener, OnInfoWindowClickListener {
+public class EsMarkerBase implements OnMarkerClickListener, OnInfoWindowClickListener, InfoWindowAdapter {
     private static final String TAG = EsMarkerBase.class.getSimpleName();
 
     protected Marker mMarker;
@@ -33,11 +34,10 @@ public abstract class EsMarkerBase implements OnMarkerClickListener, OnInfoWindo
      * @param lat
      * @param lng
      */
-    public EsMarkerBase(EsMapView mapView, String title, String snap, int iconId, double lat, double lng) {
+    public EsMarkerBase(EsMapView mapView, int iconId, double lat, double lng) {
         mMapView = mapView;
 
-        MarkerOptions markeroptions = new MarkerOptions()
-                .title(title).snippet(snap).icon(BitmapDescriptorFactory.fromResource(iconId)).position(new LatLng(lat, lng));
+        MarkerOptions markeroptions = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(iconId)).position(new LatLng(lat, lng));
         mMarker = mapView.getMap().addMarker(markeroptions);
 
         mapView.getEventHub().registerOnMarkerClickListener(mMarker, this);
@@ -57,15 +57,8 @@ public abstract class EsMarkerBase implements OnMarkerClickListener, OnInfoWindo
      * 实现自定义的info window相关接口，自定义info window适配器由子类返回
      */
     public void setWindowAdaper() {
-        mMapView.getMap().setInfoWindowAdapter(getInfoWindowAdapter());
+        mMapView.getMap().setInfoWindowAdapter(this);
     }
-
-    /**
-     * 返回自定义的info window的适配器，由需子类根据需要返回
-     * 
-     * @return InfoWindowAdapter
-     */
-    public abstract InfoWindowAdapter getInfoWindowAdapter();
 
     /**
      * 设置是否可以点击
@@ -117,5 +110,41 @@ public abstract class EsMarkerBase implements OnMarkerClickListener, OnInfoWindo
         Log.i(TAG, "EsMarkerBase, onInfoWindowClick, height=" + height);
         Log.i(TAG, "EsMarkerBase, onInfoWindowClick,      x=" + x);
         Log.i(TAG, "EsMarkerBase, onInfoWindowClick,      y=" + y);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter#getInfoContents(com.tencent
+     * .tencentmap.mapsdk.maps.model.Marker)
+     */
+    @Override
+    public final View getInfoContents(Marker arg0) {
+        return null;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter#getInfoWindow(com.tencent
+     * .tencentmap.mapsdk.maps.model.Marker)
+     */
+    @Override
+    public View getInfoWindow(Marker arg0) {
+        return null;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter#getInfoWindowPressState(com
+     * .tencent.tencentmap.mapsdk.maps.model.Marker)
+     */
+    @Override
+    public View getInfoWindowPressState(Marker arg0) {
+        return null;
     }
 }

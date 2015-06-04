@@ -7,7 +7,7 @@ import com.tencent.tencentmap.mapsdk.maps.MapView;
 
 /**
  * 将常用事件和事件hub绑定
- * 
+ *
  * @author houshengyong
  * @since 2015-5-26
  */
@@ -69,7 +69,7 @@ public class EsMapView extends MapView {
 
     /**
      * 获取EsMapView实例对应的event hub
-     * 
+     *
      * @return the hub
      */
     public EsMapEventHub getEventHub() {

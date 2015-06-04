@@ -1,22 +1,18 @@
 package com.example.test4txmap;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
 import com.didi.es.map.base.EsMapView;
-import com.didi.es.map.helper.EsMapHelper;
-import com.didi.es.map.marker.EsMyMarker;
+import com.didi.es.map.marker.EsLoadingMarker;
 import com.didi.es.map.marker.EsSimpleMarker;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 
 public class MainActivity extends Activity {
     private EsMapView mapView;
-
+    EsLoadingMarker esLoadingMarker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,34 +21,52 @@ public class MainActivity extends Activity {
         mapView = (EsMapView) findViewById(R.id.mapview);
         mapView.getMap().animateCamera(CameraUpdateFactory.newLatLng(new LatLng(39.905029, 116.389546)));
 
-        test3Marker();
+//        test3Marker();
+        new EsSimpleMarker(mapView, R.drawable.red_location, 39.905029, 116.389546);
+        new EsLoadingMarker(mapView, R.drawable.red_location, 39.905029, 116.379546).showInfoWindow();
     }
 
     /**
      * 
      */
-    private void test3Marker() {
-        new EsSimpleMarker(mapView, "1", "1", R.drawable.red_location, 39.905029, 116.389546);
-        new EsSimpleMarker(mapView, "12", "12", R.drawable.red_location, 39.915029, 116.389546);
-        new EsSimpleMarker(mapView, "123", "123", R.drawable.red_location, 39.895029, 116.389546);
-        new EsMyMarker(mapView, "1235", "1235", R.drawable.red_location, 39.875029, 116.389546);
-        new EsMyMarker(mapView, "12356", "12356", R.drawable.ic_launcher, 39.865029, 116.389546);
-        new EsMyMarker(mapView, "123567", "12356", R.drawable.ic_launcher, 39.865029, 116.289546);
-        new EsMyMarker(mapView, "1235678", "12356", R.drawable.ic_launcher, 39.865029, 116.489546);
-
-        List<LatLng> latLngs = new ArrayList<LatLng>();
-        latLngs.add(new LatLng(39.905029, 116.389546));
-        latLngs.add(new LatLng(39.915029, 116.389546));
-        latLngs.add(new LatLng(39.895029, 116.389546));
-        latLngs.add(new LatLng(39.875029, 116.389546));
-        latLngs.add(new LatLng(39.865029, 116.389546));
-        latLngs.add(new LatLng(39.865029, 116.289546));
-        latLngs.add(new LatLng(39.865029, 116.489546));
-//        EsMapHelper.zoomToSpan(mapView, latLngs, 100, 100, 100, 100);
-        
-        EsMapHelper.zoomBy(mapView, 10);
-//        EsMapHelper.zoomTo(mapView, 15);
-    }
+//    private void test3Marker() {
+//        new EsSimpleMarker(mapView, "1", "1", R.drawable.red_location, 39.905029, 116.389546);
+//        new EsSimpleMarker(mapView, "12", "12", R.drawable.red_location, 39.915029, 116.389546);
+//        new EsSimpleMarker(mapView, "123", "123", R.drawable.red_location, 39.895029, 116.389546);
+//        new EsMyMarker(mapView, "1235", "1235", R.drawable.red_location, 39.875029, 116.389546);
+//        new EsMyMarker(mapView, "12356", "12356", R.drawable.ic_launcher, 39.865029, 116.389546);
+//        new EsMyMarker(mapView, "123567", "12356", R.drawable.ic_launcher, 39.865029, 116.289546);
+//        new EsMyMarker(mapView, "1235678", "12356", R.drawable.ic_launcher, 39.865029, 116.489546);
+//
+//         esLoadingMarker = new EsLoadingMarker(mapView, "", "", R.drawable.red_location, 39.940409, 116.388817);
+//        esLoadingMarker.showInfoWindow();
+////        EsMapHelper.setMapCenter(mapView,  39.940409, 116.388817);
+////        mapView.postDelayed(new Runnable() {
+////            
+////            @Override
+////            public void run() {
+////                Log.i("test", "post to update the from xxx to yyy");
+////                esLoadingMarker.setfrom("从xxx ");
+////                esLoadingMarker.setTo("  到yyy");
+////            }
+////        }, 5000);
+////        mapView.getMap().setLogoAnchor(0);//左下
+////        mapView.getMap().setLogoAnchor(1);//右下
+//        mapView.getMap().setLogoAnchor(2);//右上
+////        mapView.getMap().setLogoAnchor(3);//左上
+//        List<LatLng> latLngs = new ArrayList<LatLng>();
+//        latLngs.add(new LatLng(39.905029, 116.389546));
+//        latLngs.add(new LatLng(39.915029, 116.389546));
+//        latLngs.add(new LatLng(39.895029, 116.389546));
+//        latLngs.add(new LatLng(39.875029, 116.389546));
+//        latLngs.add(new LatLng(39.865029, 116.389546));
+//        latLngs.add(new LatLng(39.865029, 116.289546));
+//        latLngs.add(new LatLng(39.865029, 116.489546));
+//        // EsMapHelper.zoomToSpan(mapView, latLngs, 100, 100, 100, 100);
+//
+////        EsMapHelper.zoomBy(mapView, 10);
+//        // EsMapHelper.zoomTo(mapView, 15);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

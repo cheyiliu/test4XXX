@@ -1,10 +1,12 @@
 package com.didi.es.map.marker;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.didi.es.map.base.EsMapView;
 import com.didi.es.map.base.EsMarkerBase;
-import com.tencent.tencentmap.mapsdk.maps.TencentMap.InfoWindowAdapter;
+import com.example.test4txmap.EsApp;
+import com.example.test4txmap.R;
 import com.tencent.tencentmap.mapsdk.maps.model.Marker;
 
 /**
@@ -15,44 +17,23 @@ import com.tencent.tencentmap.mapsdk.maps.model.Marker;
  */
 
 public class EsLoadingMarker extends EsMarkerBase {
-    private InfoWindowAdapter mInfoWindowAdapter = new InfoWindowAdapter() {
-        
-        @Override
-        public View getInfoWindowPressState(Marker arg0) {
-            return null;
-        }
-        
-        @Override
-        public View getInfoWindow(Marker arg0) {
-            return null;
-        }
-        
-        @Override
-        public View getInfoContents(Marker arg0) {
-            return null;
-        }
-    };
+
+    private View mLoadingView;
 
     /**
      * @param mapView
-     * @param title
-     * @param snap
      * @param iconId
      * @param lat
      * @param lng
      */
-    public EsLoadingMarker(EsMapView mapView, String title, String snap, int iconId, double lat, double lng) {
-        super(mapView, title, snap, iconId, lat, lng);
+    public EsLoadingMarker(EsMapView mapView, int iconId, double lat, double lng) {
+        super(mapView, iconId, lat, lng);
+        mLoadingView = LayoutInflater.from(EsApp.sAppContext).inflate(R.layout.map_marker_loading_popup, null);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.didi.es.map.base.EsMarkerBase#getInfoWindowAdapter()
-     */
     @Override
-    public InfoWindowAdapter getInfoWindowAdapter() {
-        return mInfoWindowAdapter;
+    public View getInfoWindow(Marker arg0) {
+        return mLoadingView;
     }
 
 }
