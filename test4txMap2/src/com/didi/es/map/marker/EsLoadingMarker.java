@@ -29,6 +29,7 @@ public class EsLoadingMarker extends EsMarkerBase {
     public EsLoadingMarker(EsMapView mapView, int iconId, double lat, double lng) {
         super(mapView, iconId, lat, lng);
         mLoadingView = LayoutInflater.from(EsApp.sAppContext).inflate(R.layout.map_marker_loading_popup, null);
+        showInfoWindow();
     }
 
     @Override
