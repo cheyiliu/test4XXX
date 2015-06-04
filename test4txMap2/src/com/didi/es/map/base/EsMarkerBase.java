@@ -28,8 +28,6 @@ public class EsMarkerBase implements OnMarkerClickListener, OnInfoWindowClickLis
      * 构造一个标记并添加到地图上，并默认注册了标记点击事件
      * 
      * @param mapView
-     * @param title
-     * @param snap
      * @param iconId
      * @param lat
      * @param lng
