@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
                 PopupHelper.displayPopupWindow(MainActivity.this, LayoutInflater.from(MainActivity.this), v);
             }
         };
+
         findViewById(R.id.btn_1).setOnClickListener(l);
         findViewById(R.id.btn_2).setOnClickListener(l);
 

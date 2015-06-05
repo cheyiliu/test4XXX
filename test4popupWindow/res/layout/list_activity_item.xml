@@ -13,8 +13,8 @@
     <Button
         android:id="@+id/btn"
         android:layout_width="0dp"
-        android:text="收藏"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:text="收藏" />
 
 </LinearLayout>
