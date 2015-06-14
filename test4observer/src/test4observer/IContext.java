@@ -1,9 +1,9 @@
 package test4observer;
 
 public interface IContext {
-	public void deliverInfo();
+	public void deliverInfo(IPerson fromWho, String what);
 
-	public void personEnter(IPerson person);
+	public void register(IPerson person);
 
-	public void personLeave(IPerson person);
+	public void unRegister(IPerson person);
 }
