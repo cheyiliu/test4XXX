@@ -8,7 +8,10 @@ public class ContextNormal implements IContext {
 
 	@Override
 	public void deliverInfo(IPerson fromWho, String what) {
-		for (IPerson iPerson : mPersons) {
+		for (int i = 0; i < mPersons.size(); i++) {
+			IPerson iPerson = mPersons.get(i);
+			System.out.println("deliverInfo, from " + fromWho.getName()
+					+ ", to " + iPerson.getName() + " " + what);
 			iPerson.hear(fromWho, what);
 		}
 	}

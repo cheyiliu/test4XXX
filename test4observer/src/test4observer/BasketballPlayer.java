@@ -21,15 +21,24 @@ public class BasketballPlayer implements IPerson {
 		if (from == this) {
 			return;// ignore
 		}
-		System.out.println(mName + " hear " + content);
+		System.out.println(mName + " hear " + from.getName() + " " + content);
 		if (content.contains("传")) {
 			say("我很独的");
 			playBasketball();
+		}
+		if (content.contains("独")) {
+			say("我走了， 你自个玩吧");
+			mContext.unRegister(this);
 		}
 	}
 
 	public void playBasketball() {
 		System.out.println(mName + " playBasketball ");
+	}
+
+	@Override
+	public String getName() {
+		return mName;
 	}
 
 }

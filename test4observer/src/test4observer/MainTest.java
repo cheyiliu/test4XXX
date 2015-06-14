@@ -17,7 +17,7 @@ public class MainTest {
 		contextNormal.register(person2);
 
 		person1.say("传球给我");
-		person2.say("你自个玩吧");
+//		person1.say("你自个玩吧");
 		contextNormal.unRegister(person2);
 	}
 
@@ -31,7 +31,7 @@ public class MainTest {
 		contextNormal.register(person2);
 
 		person1.say("传球给我");
-		person2.say("你自个玩吧");
+//		person1.say("你自个玩吧");
 		contextNormal.unRegister(person2);
 	}
 }
