@@ -37,4 +37,9 @@ public class MainAC extends Activity {
         mHandler.sendEmptyMessage(0);
     }
 
+	@Override
+    protected void onDestroy() {
+        mHandler.removeCallbacksAndMessages(null);
+        super.onDestroy();
+    }
 }
