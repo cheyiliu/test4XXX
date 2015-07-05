@@ -13,11 +13,7 @@
 
         <include layout="@layout/search_result_view" />
 
-        <include layout="@layout/search_result_empty_view" />
 
-        <include layout="@layout/search_error_view" />
-
-        <include layout="@layout/search_loading_view" />
     </FrameLayout>
 
 </LinearLayout>

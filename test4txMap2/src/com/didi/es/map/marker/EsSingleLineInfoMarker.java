@@ -1,5 +1,6 @@
 package com.didi.es.map.marker;
 
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,8 +12,8 @@ import com.example.test4txmap.R;
 import com.tencent.tencentmap.mapsdk.maps.model.Marker;
 
 /**
- * 通用标记，该标记具有单行info window信息展示。可用在车辆改派中，司机位置信息提醒等单行文本提醒处。
- * 该类新增设置文本内容的api, {@link #setTextInfo(String)}
+ * 通用标记，该标记具有单行info window信息展示。可用在车辆改派中，司机位置信息提醒等单行文本提醒处。 该类新增设置文本内容的api,
+ * {@link #setTextInfo(String)}
  * 
  * @author houshengyong
  * @since 2015-6-4
@@ -47,6 +48,16 @@ public class EsSingleLineInfoMarker extends EsMarkerBase {
      */
     public void setTextInfo(String content) {
         mTextViewContent.setText(content);
+        showInfoWindow();
+    }
+
+    /**
+     * 设置更新info window里的显示内容
+     * 
+     * @param spannableString
+     */
+    public void setTextInfo(SpannableString spannableString) {
+        mTextViewContent.setText(spannableString);
         showInfoWindow();
     }
 }

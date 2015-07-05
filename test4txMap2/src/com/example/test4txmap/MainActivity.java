@@ -1,10 +1,14 @@
 package com.example.test4txmap;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 
 import com.didi.es.map.base.EsMapView;
@@ -23,6 +27,9 @@ public class MainActivity extends Activity {
         @Override
         public boolean handleMessage(Message msg) {
             esSingleLineInfoMarker.setTextInfo("更新后的内容");
+            SpannableString spannableString = new SpannableString("0123456789");
+            spannableString.setSpan(new ForegroundColorSpan(Color.RED), 2, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
+            esSingleLineInfoMarker.setTextInfo(spannableString);
             return false;
         }
     });
