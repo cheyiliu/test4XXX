@@ -1,5 +1,6 @@
 package com.example.takeorselectpicandencodetostring;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -16,14 +17,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
+    private static final String TAG = "test";
     private static final int REQ_ALBUM_ACTIVITY = 100;
-    private static final int REQ_CAMERA_ACTIVITY = 101;
-    public static final String IMAGE_UNSPECIFIED = "image/*";
+    private static final int REQ_CAMERA_ACTIVITY = 1001;
+    private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private File mOutPutFile;
     private ImageView mImageViewResult;
+    private TextView mTextViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class MainActivity extends Activity {
             }
         });
         mImageViewResult = (ImageView) findViewById(R.id.img_result);
+        mTextViewResult = (TextView) findViewById(R.id.tv_base64_result);
     }
 
     @Override
@@ -64,40 +69,20 @@ public class MainActivity extends Activity {
         }
     }
 
-    @SuppressLint("NewApi")
     protected void handleTakePicResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (mOutPutFile != null /* && mOutPutFile.length() > 0 */) {
-                Log.e("test", "MainActivity, onActivityResult, success to take picture, mOutPutFile=" + mOutPutFile);
-                // 拍照成功，接下来进行大小调整并转换为字符串
                 Uri uri = Uri.fromFile(mOutPutFile);
-                Log.e("test", "REQ_CAMERA_ACTIVITY, uri = " + uri);
-
-                Options opts = new Options();
-                opts.inSampleSize = 5;
-
-                try {
-
-                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
-                    // Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath(), opts);
-                    if (bitmap != null) {
-                        Log.e("test", "REQ_CAMERA_ACTIVITY, bitmap.getByteCount() = " + bitmap.getByteCount());
-                        Log.e("test", "REQ_CAMERA_ACTIVITY, bitmap = " + bitmap);
-                        mImageViewResult.setImageBitmap(bitmap);
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    Log.e("test", "REQ_CAMERA_ACTIVITY, e = " + e);
+                if (uri != null) {
+                    processBitmap(uri);
+                } else {
+                    FileUtil.deleteFile(mOutPutFile);
                 }
             } else {
-                Log.e("test", "MainActivity, onActivityResult, fail to take picture");
                 FileUtil.deleteFile(mOutPutFile);
-                finish();
             }
         } else {
-            Log.e("test", "MainActivity, onActivityResult, fail to take picture2");
             FileUtil.deleteFile(mOutPutFile);
-            finish();
         }
     }
 
@@ -105,20 +90,55 @@ public class MainActivity extends Activity {
         if (resultCode == RESULT_OK) {
             if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
-                Log.e("test", "REQ_ALBUM_ACTIVITY, uri = " + uri);
-                mImageViewResult.setImageURI(uri);
-                Log.e("test", "MainActivity, onActivityResult, success to select picture, uri=" + uri);
+                if (uri != null) {
+                    processBitmap(uri);
+                }
             } else {
-                Log.e("test", "MainActivity, onActivityResult, fail to select picture2");
             }
         } else {
-            Log.e("test", "MainActivity, onActivityResult, fail to select picture");
         }
+    }
+
+    @SuppressLint("NewApi")
+    protected void processBitmap(final Uri uri) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Options opts = new Options();
+                opts.inSampleSize = 5;
+
+                try {
+                    final Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
+                    // Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath(), opts);
+                    if (bitmap != null) {
+                        // encode to string
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+                        byte[] b = baos.toByteArray();
+                        final String encodedBitmapAsString = Base64.encode(b);
+
+                        UiThreadHandler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Log.i(TAG, "the encoded string = " + encodedBitmapAsString);
+                                mTextViewResult.setText(encodedBitmapAsString);
+                                mImageViewResult.setImageBitmap(bitmap);
+                            }
+                        });
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
     private void dispatchTakePictureIntent() {
         mOutPutFile = FileConfig.getPhotoOutputFile();
-        Log.e("test", "MainActivity, dispatchTakePictureIntent, mOutPutFile=" + mOutPutFile);
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
             if (mOutPutFile != null) {
@@ -129,7 +149,6 @@ public class MainActivity extends Activity {
     }
 
     private void dispatchPickPictureIntent() {
-        Log.e("test", "MainActivity, dispatchPickPictureIntent");
         Intent pickPictureIntent = new Intent(Intent.ACTION_PICK, null);
         if (pickPictureIntent.resolveActivity(this.getPackageManager()) != null) {
             pickPictureIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
