@@ -2,9 +2,7 @@ package com.example.takeorselectpicandencodetostring;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private static final String TAG = "test";
@@ -26,8 +25,12 @@ public class MainActivity extends Activity {
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private File mOutPutFile;
+
     private ImageView mImageViewResult;
     private TextView mTextViewResult;
+
+    private String mEncodedStr;
+    private Bitmap mBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class MainActivity extends Activity {
             if (mOutPutFile != null /* && mOutPutFile.length() > 0 */) {
                 Uri uri = Uri.fromFile(mOutPutFile);
                 if (uri != null) {
-                    processBitmap(uri);
+                    processBitmapAsync(uri);
                 } else {
                     FileUtil.deleteFile(mOutPutFile);
                 }
@@ -91,7 +94,7 @@ public class MainActivity extends Activity {
             if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
                 if (uri != null) {
-                    processBitmap(uri);
+                    processBitmapAsync(uri);
                 }
             } else {
             }
@@ -99,42 +102,85 @@ public class MainActivity extends Activity {
         }
     }
 
-    @SuppressLint("NewApi")
-    protected void processBitmap(final Uri uri) {
+    protected void processBitmapAsync(final Uri uri) {
         new Thread(new Runnable() {
 
             @Override
             public void run() {
-                Options opts = new Options();
-                opts.inSampleSize = 5;
-
-                try {
-                    final Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
-                    // Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath(), opts);
-                    if (bitmap != null) {
-                        // encode to string
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-                        byte[] b = baos.toByteArray();
-                        final String encodedBitmapAsString = Base64.encode(b);
-
-                        UiThreadHandler.post(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                Log.i(TAG, "the encoded string = " + encodedBitmapAsString);
-                                mTextViewResult.setText(encodedBitmapAsString);
-                                mImageViewResult.setImageBitmap(bitmap);
-                            }
-                        });
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                processBitmapSync(uri);
             }
         }).start();
 
+    }
+
+    private void processBitmapSync(final Uri uri) {
+        try {
+            Options opts = new Options();
+            opts.inJustDecodeBounds = true;
+
+            BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
+            // 图片太小，提示重新选择
+            if (opts.outHeight < 500 || opts.outWidth < 500) {
+                Toast.makeText(this, "图片太小，请重新选择", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Bitmap srcBitmap = null;
+            // 图片分辨率相对屏幕分辨率的最大倍数
+            float maxRatio = 0.5f;
+            // 宽或高超过限定，进行缩放
+            if (opts.outHeight > ScreenUtil.getHeight() * maxRatio || opts.outWidth > ScreenUtil.getWidth() * maxRatio) {
+                int heightRatio = Math.round(opts.outHeight / ScreenUtil.getHeight() / maxRatio);
+                int widthRatio = Math.round(opts.outWidth / ScreenUtil.getWidth() / maxRatio);
+                opts.inJustDecodeBounds = false;
+                opts.inSampleSize = Math.max(heightRatio, widthRatio);
+                srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
+            } else {
+                // 原始大小
+                srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            }
+            // 判断是否需要对图像进行旋转处理
+            // int degree = BitmapUtils.readPictureDegree(BitmapUtils
+            // .getRealPathFromUri(getContentResolver(), imageUri));
+            int degree = ExifUtils.getExifOrientation(this, uri);
+            if (degree != 0) {
+                mBitmap = BtsBitmapUtils.rotateBitmap(srcBitmap, degree, true);
+                // mImageViewResult.setImageBitmap(resBitmap);
+                encodeBitmapToString(mBitmap);
+            } else {
+                // 不需要旋转处理
+                // mImageViewResult.setImageBitmap(srcBitmap);
+                mBitmap = srcBitmap;
+                encodeBitmapToString(srcBitmap);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "文件无法打开", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+    }
+
+    private void encodeBitmapToString(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            mEncodedStr = Base64.encode(b);
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
+        UiThreadHandler.post(new Runnable() {
+
+            @Override
+            public void run() {
+                mImageViewResult.setImageBitmap(mBitmap);
+                mTextViewResult.setText(mEncodedStr);
+            }
+        });
     }
 
     private void dispatchTakePictureIntent() {
