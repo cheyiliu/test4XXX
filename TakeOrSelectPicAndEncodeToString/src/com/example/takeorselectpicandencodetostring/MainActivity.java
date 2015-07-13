@@ -3,6 +3,7 @@ package com.example.takeorselectpicandencodetostring;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -122,6 +123,7 @@ public class MainActivity extends Activity {
         Log.i(TAG, "processBitmapSync, uri=" + uri);
         try {
             Options opts = new Options();
+            opts.inPreferredConfig = Bitmap.Config.ARGB_4444;
             opts.inJustDecodeBounds = true;
 
             BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
@@ -138,6 +140,8 @@ public class MainActivity extends Activity {
             if (opts.outHeight > ScreenUtil.getHeight() * maxRatio || opts.outWidth > ScreenUtil.getWidth() * maxRatio) {
                 int heightRatio = Math.round(opts.outHeight / ScreenUtil.getHeight() / maxRatio);
                 int widthRatio = Math.round(opts.outWidth / ScreenUtil.getWidth() / maxRatio);
+                Log.i(TAG, "heightRatio=" + heightRatio);
+                Log.i(TAG, "widthRatio =" + widthRatio);
                 opts.inJustDecodeBounds = false;
                 opts.inSampleSize = Math.max(heightRatio, widthRatio);
                 srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
@@ -168,14 +172,17 @@ public class MainActivity extends Activity {
         }
     }
 
+    @SuppressLint("NewApi")
     private void encodeBitmapToString(Bitmap bitmap) {
         Log.i(TAG, "encodeBitmapToString");
         if (bitmap != null) {
+            Log.i(TAG, "bitmap.getAllocationByteCount()=" + bitmap.getAllocationByteCount());
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             byte[] b = baos.toByteArray();
             mEncodedStr = Base64.encode(b);
             updateUI();
+            FileUtil.deleteFile(mOutPutFile);// finally delete the file
         }
     }
 
@@ -188,7 +195,7 @@ public class MainActivity extends Activity {
                 Log.i(TAG, "updateUI, run");
                 mImageViewResult.setImageBitmap(mBitmap);
                 // mTextViewResult.setText(mEncodedStr);// consume many time
-                Log.i(TAG, "mEncodedStr=" + mEncodedStr);
+                // Log.i(TAG, "mEncodedStr=" + mEncodedStr);
             }
         });
     }
