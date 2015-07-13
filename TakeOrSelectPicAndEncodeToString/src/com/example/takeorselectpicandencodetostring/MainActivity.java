@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_select_photo).setOnClickListener(new OnClickListener() {
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("test", "MainActivity, onActivityResult, data=" + data);
+        Log.i(TAG, "onActivityResult, data=" + data);
         switch (requestCode) {
         case REQ_CAMERA_ACTIVITY:
             handleTakePicResult(requestCode, resultCode, data);
@@ -73,6 +74,7 @@ public class MainActivity extends Activity {
     }
 
     protected void handleTakePicResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "handleTakePicResult");
         if (resultCode == RESULT_OK) {
             if (mOutPutFile != null /* && mOutPutFile.length() > 0 */) {
                 Uri uri = Uri.fromFile(mOutPutFile);
@@ -90,6 +92,7 @@ public class MainActivity extends Activity {
     }
 
     protected void handleSelectPicResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "handleSelectPicResult");
         if (resultCode == RESULT_OK) {
             if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
@@ -103,10 +106,12 @@ public class MainActivity extends Activity {
     }
 
     protected void processBitmapAsync(final Uri uri) {
+        Log.i(TAG, "processBitmapAsync, uri=" + uri);
         new Thread(new Runnable() {
 
             @Override
             public void run() {
+                Log.i(TAG, "processBitmapAsync, run");
                 processBitmapSync(uri);
             }
         }).start();
@@ -114,6 +119,7 @@ public class MainActivity extends Activity {
     }
 
     private void processBitmapSync(final Uri uri) {
+        Log.i(TAG, "processBitmapSync, uri=" + uri);
         try {
             Options opts = new Options();
             opts.inJustDecodeBounds = true;
@@ -163,9 +169,10 @@ public class MainActivity extends Activity {
     }
 
     private void encodeBitmapToString(Bitmap bitmap) {
+        Log.i(TAG, "encodeBitmapToString");
         if (bitmap != null) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             byte[] b = baos.toByteArray();
             mEncodedStr = Base64.encode(b);
             updateUI();
@@ -173,17 +180,21 @@ public class MainActivity extends Activity {
     }
 
     private void updateUI() {
+        Log.i(TAG, "updateUI");
         UiThreadHandler.post(new Runnable() {
 
             @Override
             public void run() {
+                Log.i(TAG, "updateUI, run");
                 mImageViewResult.setImageBitmap(mBitmap);
-                mTextViewResult.setText(mEncodedStr);
+                // mTextViewResult.setText(mEncodedStr);// consume many time
+                Log.i(TAG, "mEncodedStr=" + mEncodedStr);
             }
         });
     }
 
     private void dispatchTakePictureIntent() {
+        Log.i(TAG, "dispatchTakePictureIntent");
         mOutPutFile = FileConfig.getPhotoOutputFile();
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
@@ -195,6 +206,7 @@ public class MainActivity extends Activity {
     }
 
     private void dispatchPickPictureIntent() {
+        Log.i(TAG, "dispatchPickPictureIntent");
         Intent pickPictureIntent = new Intent(Intent.ACTION_PICK, null);
         if (pickPictureIntent.resolveActivity(this.getPackageManager()) != null) {
             pickPictureIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
