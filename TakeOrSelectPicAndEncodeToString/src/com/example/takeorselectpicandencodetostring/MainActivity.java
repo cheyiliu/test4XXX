@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
     private File mOutPutFile;
 
     private ImageView mImageViewResult;
+    private ImageView mImageViewResult2;
     private TextView mTextViewResult;
 
     private String mEncodedStr;
@@ -55,6 +56,7 @@ public class MainActivity extends Activity {
             }
         });
         mImageViewResult = (ImageView) findViewById(R.id.img_result);
+        mImageViewResult2 = (ImageView) findViewById(R.id.img_result2);
         mTextViewResult = (TextView) findViewById(R.id.tv_base64_result);
     }
 
@@ -136,6 +138,10 @@ public class MainActivity extends Activity {
             Bitmap srcBitmap = null;
             // 图片分辨率相对屏幕分辨率的最大倍数
             float maxRatio = 0.5f;
+            {
+                // 方案2，取inSampleSize
+                
+            }
             // 宽或高超过限定，进行缩放
             if (opts.outHeight > ScreenUtil.getHeight() * maxRatio || opts.outWidth > ScreenUtil.getWidth() * maxRatio) {
                 int heightRatio = Math.round(opts.outHeight / ScreenUtil.getHeight() / maxRatio);
@@ -147,7 +153,7 @@ public class MainActivity extends Activity {
                 srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
             } else {
                 // 原始大小
-                srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                srcBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
             }
             // 判断是否需要对图像进行旋转处理
             // int degree = BitmapUtils.readPictureDegree(BitmapUtils
@@ -183,6 +189,25 @@ public class MainActivity extends Activity {
             mEncodedStr = Base64.encode(b);
             updateUI();
             FileUtil.deleteFile(mOutPutFile);// finally delete the file
+            
+            {
+                UiThreadHandler.postDelayed(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        byte[] b2 = Base64.decode(mEncodedStr);
+                        Bitmap bitmap2 = BitmapFactory.decodeByteArray(b2, 0, b2.length);
+                        mImageViewResult2.setImageResource(R.drawable.ic_launcher);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mImageViewResult2.setImageBitmap(bitmap2);
+                    }
+                }, 3000);
+
+            }
         }
     }
 
