@@ -19,7 +19,7 @@ public class WaveView extends View {
     private int[] mRingsRadius = new int[mRingsCount];
 
     // 环的宽度
-    private int mRingWidth = 5;
+    private int mRingWidth = 3;
 
     // 每次递增的步长
     private int mStep = 2;
@@ -64,7 +64,7 @@ public class WaveView extends View {
 
         // 设置最大最小半径
         mMaxRadius = getWidth() / 2;
-        mMinRadius = 100;
+        mMinRadius = 150;
         mCenter = getWidth() / 2;
 
         // 设置环数及初始半径

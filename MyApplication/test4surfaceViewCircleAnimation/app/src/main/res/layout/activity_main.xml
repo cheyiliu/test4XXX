@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/material_blue_grey_900"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:background="@color/material_blue_grey_900"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
@@ -12,11 +13,23 @@
     <com.example.hsy.test4surfaceviewcircleanimation.WaveView
         android:id="@+id/wave_view"
         android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:layout_marginTop="-10dp"
+        android:layout_centerHorizontal="true" />
 
+
+    <com.example.hsy.test4surfaceviewcircleanimation.CircleImageView
+        android:id="@+id/car_shift_request_img_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/main_driver_photo"
+        app:border_color="@color/color_orange_a"
+        app:border_width="1dp" />
     <!--<SurfaceView-->
-        <!--android:id="@+id/circle_surface"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_centerInParent="true" />-->
+    <!--android:id="@+id/circle_surface"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_centerInParent="true" />-->
 </RelativeLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- UI基本颜色 -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="white_translucent_75">#c0ffffff</color>
+    <color name="translucent_gray">#96828282</color>
+    <color name="list_divider">#2cffffff</color>
+    <color name="progress_bar_pro_color">#ffba00</color>
+    <color name="color_not_pay">#e7888e</color>
+    <color name="color_pay">#52b886</color>
+    <color name="red_low_speed">#ff5110</color>
+    <color name="blue_night">#666666</color>
+    <color name="yellow_out_mil">#ffb000</color>
+
+    <!-- other -->
+    <color name="text_color_yellow">#ff8b01</color>
+    <color name="line_color_gray">#cbcbcb</color>
+    <color name="line_title_color">#c8cccccc</color>
+    <color name="red">#ff0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="textview_color">#808080</color>
+    <!-- 相机界面 -->
+    <color name="camera_tool_bar_bg_gray">#111111</color>
+
+    <!-- 我的余额 -->
+    <color name="my_balance_green">#5da44a</color>
+
+    <!-- 夜间模式 -->
+    <color name="dark_red">#e0c53800</color>
+
+    <!-- common color -->
+    <color name="more_gray_alpha_40">#663a3a3a</color>
+    <color name="most_light_gray">#bfbfbf</color>
+
+    <!-- 月、周账单文字背景 -->
+    <color name="bg_gray">#f0f0f0</color>
+
+    <!-- White & Black -->
+    <color name="white_alpha_10">#19FFFFFF</color>
+    <color name="white_alpha_20">#33FFFFFF</color>
+    <color name="white_alpha_25">#3FFFFFFF</color>
+    <color name="white_alpha_30">#4BFFFFFF</color>
+    <color name="white_alpha_35">#59FFFFFF</color>
+    <color name="white_alpha_40">#66FFFFFF</color>
+    <color name="white_alpha_50">#7fFFFFFF</color>
+    <color name="white_alpha_60">#99FFFFFF</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
+    <color name="white_alpha_80">#CCFFFFFF</color>
+    <color name="white_alpha_90">#E6FFFFFF</color>
+    <color name="white_alpha_92">#EAFFFFFF</color>
+    <color name="more_trans_white">#70ffffff</color>
+    <color name="black_alpha_10">#19000000</color>
+    <color name="black_alpha_20">#33000000</color>
+    <color name="black_alpha_25">#3000000F</color>
+    <color name="black_alpha_30">#4B000000</color>
+    <color name="black_alpha_35">#59000000</color>
+    <color name="black_alpha_40">#66000000</color>
+    <color name="black_alpha_50">#7f000000</color>
+    <color name="black_alpha_60">#99000000</color>
+    <color name="black_alpha_70">#B3000000</color>
+    <color name="black_alpha_80">#CC000000</color>
+    <color name="black_alpha_90">#E6000000</color>
+    <color name="black_alpha_92">#EA000000</color>
+
+    <!-- 订单拍卖 -->
+    <color name="dlg_div_line_grabbed_loading">#1effffff</color>
+
+    <!-- Common Color -->
+    <!-- 背景 -->
+    <color name="color_white_a">#ffffff</color>
+    <!-- 背景 -->
+    <color name="color_white_b">#fafafa</color>
+    <!-- 导航背景 -->
+    <color name="color_white_c">#f2f2f2</color>
+    <color name="color_white_c_bor">#d9d9d9</color>
+    <!-- 不可点击 -->
+    <color name="color_white_d">#e5e5e5</color>
+    <!-- 辅助文字 -->
+    <color name="color_gray_a">#cccccc</color>
+    <!-- 提示文字 -->
+    <color name="color_gray_b">#999999</color>
+    <!-- 浮层文字 -->
+    <color name="color_gray_c">#878787</color>
+    <!-- 辅助文字 -->
+    <color name="color_gray_d">#666666</color>
+    <!-- 通用文字 -->
+    <color name="color_gray_e">#333333</color>
+    <!-- 主要、点击文字 -->
+    <color name="color_orange_a">#ff8903</color>
+    <color name="color_orange_a_pre">#ff7703</color>
+    <!-- 辅助文字 -->
+    <color name="color_orange_b">#ffbd66</color>
+    <!-- 提示文字 -->
+    <color name="color_red_a">#dd170c</color>
+    <!-- 提示文字 -->
+    <color name="color_greed_a">#52b777</color>
+
+    <!-- 按钮背景颜色 -->
+    <color name="color_blue_a">#00abfc</color>
+
+    <!-- 按钮点击背景颜色 -->
+    <color name="color_blue_a_pre">#009efc</color>
+
+    <!-- 订单已经被别人抢占颜色 -->
+    <color name="txt_color_main_order_fragment_grabbed_by_others_red">#ff541e</color>
+    <color name="border_color_main_order_fragment_grabbed_by_others_photo_win">#ff6f43</color>
+    <color name="border_color_main_order_fragment_grabbed_by_others_photo_fail">#ffffff</color>
+
+    <!-- 载客模式设定 -->
+    <color name="txt_setting_orange_normal">#ffff8903</color>
+    <color name="txt_setting_orange_pressed">#ccff8903</color>
+    <color name="txt_setting_white_normal">#ffffffff</color>
+    <color name="txt_setting_white_pressed">#ccffffff</color>
+    <color name="capture_result_view">#b0000000</color>
+    <color name="capture_viewfinder_mask">#60000000</color>
+    <color name="search_text_color">#d3d3d3</color>
+
+    <!-- 交接班相关颜色 -->
+    <color name="color_33">#333333</color>
+    <color name="color_99">#999999</color>
+    <color name="color_cc">#cc0000</color>
+</resources>
