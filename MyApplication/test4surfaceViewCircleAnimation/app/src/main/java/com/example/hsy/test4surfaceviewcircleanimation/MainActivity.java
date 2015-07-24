@@ -27,41 +27,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        surface = (SurfaceView) findViewById(R.id.circle_surface);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!stop) {
-                    holder = surface.getHolder();
-                    if (!holder.getSurface().isValid()) {
-                        continue;
-                    }
-
-                    Canvas canvas = null;
-                    try {
-                        canvas = holder.lockCanvas();
-                        synchronized (holder) {
-                            if (canvas != null) {
-                                draw(canvas);
-                            }
-                        }
-                    } catch (Exception e) {
-                    } finally {
-                        if (canvas != null) {
-                            holder.unlockCanvasAndPost(canvas);
-                        }
-                    }
-
-                    try {
-                        Thread.sleep(0);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        }).start();
+//        surface = (SurfaceView) findViewById(R.id.circle_surface);
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (!stop) {
+//                    holder = surface.getHolder();
+//                    if (!holder.getSurface().isValid()) {
+//                        continue;
+//                    }
+//
+//                    Canvas canvas = null;
+//                    try {
+//                        canvas = holder.lockCanvas();
+//                        synchronized (holder) {
+//                            if (canvas != null) {
+//                                draw(canvas);
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                    } finally {
+//                        if (canvas != null) {
+//                            holder.unlockCanvasAndPost(canvas);
+//                        }
+//                    }
+//
+//                    try {
+//                        Thread.sleep(0);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//        }).start();
     }
 
     @Override
