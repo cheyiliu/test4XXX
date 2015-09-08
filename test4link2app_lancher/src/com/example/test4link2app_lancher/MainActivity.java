@@ -12,7 +12,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         WebView wv = (WebView) findViewById(R.id.webview);
-        wv.loadUrl("file:///android_asset/wst.html"); 
+        wv.loadUrl("file:///android_asset/wst.html");
     }
 
     @Override
