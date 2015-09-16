@@ -123,7 +123,7 @@ public class AndFixManager {
 	 */
 	public synchronized void fix(File file, ClassLoader classLoader,
 			List<String> classes) {
-	    Log.d("euler", "AndFixManager, fix2");
+	    Log.d("euler", "AndFixManager, fix2, file=" + file.getAbsolutePath());
 		if (!mSupport) {
 			return;
 		}
@@ -195,7 +195,7 @@ public class AndFixManager {
 	 *            class
 	 */
 	private void fixClass(Class<?> clazz, ClassLoader classLoader) {
-	    Log.d("euler", "AndFixManager, fixClass");
+	    Log.d("euler", "AndFixManager, fixClass, " + clazz);
 		Method[] methods = clazz.getDeclaredMethods();
 		MethodReplace methodReplace;
 		String clz;
@@ -222,7 +222,10 @@ public class AndFixManager {
 	 */
 	private void replaceMethod(ClassLoader classLoader, String clz,
 			String meth, Method method) {
-	    Log.d("euler", "AndFixManager, replaceMethod");
+	    Log.d("euler", "AndFixManager, replaceMethod, " + classLoader.toString());
+	    Log.d("euler", "AndFixManager, replaceMethod, " + clz);
+	    Log.d("euler", "AndFixManager, replaceMethod, " + meth);
+	    Log.d("euler", "AndFixManager, replaceMethod, " + method);
 		try {
 			String key = clz + "@" + classLoader.toString();
 			Class<?> clazz = mFixedClass.get(key);

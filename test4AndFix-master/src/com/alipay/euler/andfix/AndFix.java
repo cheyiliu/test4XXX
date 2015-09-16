@@ -58,7 +58,8 @@ public class AndFix {
 	 */
 	public static void addReplaceMethod(Method src, Method dest) {
 		try {
-		    Log.d("euler", "AndFix, addReplaceMethod");
+		    Log.d("euler", "AndFix, addReplaceMethod, src=" + src);
+		    Log.d("euler", "AndFix, addReplaceMethod, dest=" + dest);
 			replaceMethod(src, dest);
 			initFields(dest.getDeclaringClass());
 		} catch (Throwable e) {
